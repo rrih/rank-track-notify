@@ -1,0 +1,22 @@
+name: Notify Ranking
+
+on:
+  schedule:
+    - cron: "0 * * * *" # 毎時間ごとに実行
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install dependencies
+        run: npm install @supabase/supabase-js node-fetch
+      - name: Notify Ranking
+        run: node .github/scripts/notifyRanking.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
