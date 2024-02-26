@@ -1,18 +1,18 @@
-const fetch = require('node-fetch');
-require('dotenv').config();
+const axios = require('axios');
 
-async function main() {
+const notify = async () => {
   try {
-    // POSTリクエストを送信する
-    await fetch(`https://rank-battle-tracker.vercel.app/api/ranking`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  } catch (error) {
-    console.error(error);
+    const res = await axios.post(
+      'https://rank-battle-tracker.vercel.app/api/notify',
+      {
+        message: 'Hello, World!'
+      }
+    );
+    const data = await res.data;
+    console.log(data);
+  } catch (err) {
+    console.error(err);
   }
 }
 
-main().catch(console.error);
+notify();
