@@ -1,6 +1,7 @@
 name: Notify Ranking
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 * * * *" # 毎時間ごとに実行
 
